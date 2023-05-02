@@ -31,10 +31,10 @@ CREATE TABLE `books` (
   `id` int NOT NULL,
   `title` varchar(255) NOT NULL,
   `cover_image` varchar(255) NOT NULL,
-  `author` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `author` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `genre` varchar(255) NOT NULL,
-  `publication_year` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `publication_year` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `books`
@@ -52,12 +52,12 @@ INSERT INTO `books` (`id`, `title`, `cover_image`, `author`, `genre`, `publicati
 -- Table structure for table `discussion`
 --
 
-CREATE TABLE `discussion` (
-  `group_id` int NOT NULL,
-  `user_id` int NOT NULL,
-  `text` text NOT NULL,
-  `timestamp` timestamp(6) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+-- CREATE TABLE `discussion` (
+--   `group_id` int NOT NULL,
+--   `user_id` int NOT NULL,
+--   `text` text NOT NULL,
+--   `timestamp` timestamp(6) NOT NULL
+-- ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -70,7 +70,7 @@ CREATE TABLE `favourite` (
   `user_id` int NOT NULL,
   `content_type` varchar(255) NOT NULL,
   `content_id` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -82,7 +82,7 @@ CREATE TABLE `follower` (
   `id` int NOT NULL,
   `follower_id` int NOT NULL,
   `following_id` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -94,7 +94,7 @@ CREATE TABLE `groups` (
   `group_id` varchar(255) NOT NULL,
   `group_name` varchar(255) NOT NULL,
   `image` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `groups`
@@ -113,7 +113,7 @@ CREATE TABLE `group_members` (
   `id` int NOT NULL,
   `user_id` int NOT NULL,
   `group_id` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -128,7 +128,7 @@ CREATE TABLE `movies` (
   `director` varchar(255) NOT NULL,
   `genre` varchar(255) NOT NULL,
   `release_year` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `movies`
@@ -155,7 +155,7 @@ CREATE TABLE `reviews` (
   `rating` int NOT NULL,
   `review_text` varchar(255) NOT NULL,
   `timestamp` timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -170,7 +170,7 @@ CREATE TABLE `users` (
   `password` varchar(255) NOT NULL,
   `profile_image` varchar(255) NOT NULL,
   `bio` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`

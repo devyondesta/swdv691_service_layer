@@ -8,10 +8,10 @@ var randomstring = require("randomstring");
 const upload = multer({ limits: { fileSize: 4000000 } }).single('profile')
 
 var mysqlConnection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'cinelit',
+    host: 'sql9.freemysqlhosting.net',
+    user: 'sql9615594',
+    password: 'tc5hfpHlTT',
+    database: 'sql9615594',
     multipleStatements: true
 });
 
