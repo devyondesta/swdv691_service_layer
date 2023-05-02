@@ -1,6 +1,11 @@
 const jwt = require('jsonwebtoken');
 const mysql = require('mysql');
 const authJWT = require('../middleware/authJWT')
+const multer = require('multer')
+const sharp = require('sharp')
+var randomstring = require("randomstring");
+
+const upload = multer({ limits: { fileSize: 4000000 } }).single('profile')
 
 var mysqlConnection = mysql.createConnection({
     host: 'localhost',
@@ -19,23 +24,36 @@ mysqlConnection.connect((err) => {
 
 
 exports.register = (req, res) => {
-    console.log(req.body);
-    mysqlConnection.query('SELECT * FROM users WHERE email = ?', [req.body.email], (err, rows, fields) => {
-        if (rows.length > 0) {
-            return res.status(404).json({ emailnotfound: "Email already exist" });
-        }
-        else {
-            let stmt = `INSERT INTO users(username,email,password,bio) VALUES(?,?,?,?)`;
-            let data = [req.body.username, req.body.email, req.body.password, req.body.bio];
-
-            mysqlConnection.query(stmt, data, (err, results, fields) => {
-                if (err) {
-                    return console.error(err.message);
+    upload(req, res, async function (err) {
+        if (err || req.file === undefined) {
+            console.log(err)
+            res.send("File size is too large")
+        } else {
+            mysqlConnection.query('SELECT * FROM users WHERE email = ?', [req.body.email], async (err, rows, fields) => {
+                if (rows.length > 0) {
+                    return res.status(404).json({ emailExist: "Email already exist" });
                 }
-                console.log('Insert Id:' + results.insertId);
-            });
+                else {
+                    let fileName = randomstring.generate(10) + ".jpeg"
+                    var image = await sharp(req.file.buffer)
+                        .jpeg({
+                            quality: 40,
+                        }).toFile('./app/uploads/' + fileName)
+                        .catch(err => { console.log('error: ', err) });
+                    console.log(fileName);
+                    let stmt = `INSERT INTO users(username,email,password,profile_image,bio) VALUES(?,?,?,?,?)`;
+                    let data = [req.body.username, req.body.email, req.body.password, fileName, req.body.bio];
 
-            return res.status(200).json({ success: "Registered successfully" });
+                    mysqlConnection.query(stmt, data, (err, results, fields) => {
+                        if (err) {
+                            return console.error(err.message);
+                        }
+                        console.log('Insert Id:' + results.insertId);
+                    });
+
+                    return res.status(200).json({ success: "Registered successfully" });
+                }
+            });
         }
     });
 
@@ -48,7 +66,7 @@ exports.login = (req, res) => {
                 user_id: rows[0].id,
                 email: rows[0].email,
                 username: rows[0].username,
-                profile: rows[0].profile,
+                profile_image: rows[0].profile_image,
                 bio: rows[0].bio
             }, 'secret');
             return res.status(200).json({ token: token });

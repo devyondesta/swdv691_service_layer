@@ -5,6 +5,10 @@ const cors = require('cors');
 const bodyParser = require("body-parser");
 const routes = require("./app/routes/routes")
 
+app.use(express.static('./app/uploads/'));
+
+app.use('/images', express.static('./app/uploads/'));
+
 app.use(
     bodyParser.urlencoded({
         extended: false
