@@ -1,9 +1,10 @@
 const express = require("express");
 const http = require('http');
 const app = express();
+const serverles = require("serverless-http");
 const cors = require('cors');
 const bodyParser = require("body-parser");
-const routes = require("./app/routes/routes")
+const routes = require("./app/routes/routes");
 
 app.use(express.static('./app/uploads/'));
 
@@ -26,5 +27,8 @@ app.use(express.urlencoded({ extended: true }))
 app.use(routes);
 
 
-const PORT = 8000;
-app.listen(PORT, () => console.log(`Server Running at port ${PORT}`));
+// const PORT = 8000;
+// app.listen(PORT, () => console.log(`Server Running at port ${PORT}`));
+
+module.exports = app
+module.exports.handler = serverles(app);

@@ -52,12 +52,12 @@ INSERT INTO `books` (`id`, `title`, `cover_image`, `author`, `genre`, `publicati
 -- Table structure for table `discussion`
 --
 
--- CREATE TABLE `discussion` (
---   `group_id` int NOT NULL,
---   `user_id` int NOT NULL,
---   `text` text NOT NULL,
---   `timestamp` timestamp(6) NOT NULL
--- ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+CREATE TABLE `discussion` (
+  `group_id` int NOT NULL,
+  `user_id` int NOT NULL,
+  `text` text NOT NULL,
+  `timestamp` timestamp(6) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
