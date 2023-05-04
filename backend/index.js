@@ -1,7 +1,7 @@
 const express = require("express");
 const http = require('http');
 const app = express();
-const serverles = require("serverless-http");
+// const serverles = require("serverless-http");
 const cors = require('cors');
 const bodyParser = require("body-parser");
 const routes = require("./app/routes/routes");
@@ -27,8 +27,10 @@ app.use(express.urlencoded({ extended: true }))
 app.use(routes);
 
 
-// const PORT = 8000;
+const PORT = 8000;
+const server = http.createServer(app);
+server.listen(PORT, () => console.log(`Server runnung at port ${PORT}`));
 // app.listen(PORT, () => console.log(`Server Running at port ${PORT}`));
 
-module.exports = app
-module.exports.handler = serverles(app);
+// module.exports = app
+// module.exports.handler = serverles(app);
